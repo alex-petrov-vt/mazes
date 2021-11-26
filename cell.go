@@ -20,3 +20,8 @@ func (c *cell) unlink(other *cell) {
 	delete(c.links, other)
 	delete(other.links, c)
 }
+
+func (c *cell) isLinked(other *cell) bool {
+	_, hasLink := c.links[other]
+	return hasLink
+}

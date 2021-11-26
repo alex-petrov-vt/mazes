@@ -24,12 +24,10 @@ func TestLinkingCells(t *testing.T) {
 
 	c1.link(c2)
 	// Make sure linking is bidirectional
-	assert.True(t, c1.links[c2])
-	assert.True(t, c2.links[c1])
+	assert.True(t, c1.isLinked(c2))
+	assert.True(t, c2.isLinked(c1))
 
 	c1.unlink(c2)
-	_, check := c1.links[c2]
-	assert.False(t, check)
-	_, check = c2.links[c1]
-	assert.False(t, check)
+	assert.False(t, c1.isLinked(c2))
+	assert.False(t, c2.isLinked(c1))
 }

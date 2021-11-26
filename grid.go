@@ -2,6 +2,7 @@ package main
 
 import (
 	"math/rand"
+	"strings"
 )
 
 type grid struct {
@@ -70,4 +71,41 @@ func (g *grid) getRandomCell(seed int64) *cell {
 	row := rand.Intn(g.rows)
 	col := rand.Intn(g.cols)
 	return g.cells[row][col]
+}
+
+func (g *grid) String() string {
+	result := strings.Builder{}
+	result.WriteString("\n+" + strings.Repeat("---+", g.cols) + "\n")
+
+	for row := 0; row < g.rows; row++ {
+		rowLine := strings.Builder{}
+		borderLine := strings.Builder{}
+		rowLine.WriteString("|")
+		borderLine.WriteString("+")
+		for col := 0; col < g.cols; col++ {
+			cell := g.cells[row][col]
+
+			// Each cell is three spaces wide
+			rowLine.WriteString("   ")
+
+			// Check for cell below
+			if row == g.rows-1 || !cell.isLinked(g.cells[row+1][col]) {
+				borderLine.WriteString("---")
+			} else {
+				borderLine.WriteString("   ")
+			}
+
+			// Check for cell to the right
+			if col == g.cols-1 || !cell.isLinked(g.cells[row][col+1]) {
+				rowLine.WriteString("|")
+			} else {
+				rowLine.WriteString(" ")
+			}
+			borderLine.WriteString("+")
+		}
+		result.WriteString(rowLine.String() + "\n")
+		result.WriteString(borderLine.String() + "\n")
+	}
+
+	return result.String()
 }

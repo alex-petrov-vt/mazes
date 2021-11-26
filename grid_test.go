@@ -42,3 +42,32 @@ func TestNewGrid(t *testing.T) {
 	assert.Equal(t, g.getSize(), 10000)
 	assert.Equal(t, g.getRandomCell(randomSeed), g.cells[81][87])
 }
+
+func TestGridDrawingASCII(t *testing.T) {
+	grid := newGrid(3, 3)
+
+	grid.cells[0][0].link(grid.cells[0][1])
+	grid.cells[0][0].link(grid.cells[1][0])
+
+	grid.cells[0][1].link(grid.cells[0][2])
+
+	grid.cells[0][2].link(grid.cells[1][2])
+
+	grid.cells[1][1].link(grid.cells[1][2])
+	grid.cells[1][1].link(grid.cells[2][1])
+
+	grid.cells[1][2].link(grid.cells[2][2])
+
+	grid.cells[2][0].link(grid.cells[2][1])
+
+	expected := `
++---+---+---+
+|           |
++   +---+   +
+|   |       |
++---+   +   +
+|       |   |
++---+---+---+
+`
+	assert.Equal(t, expected, grid.String())
+}
