@@ -11,7 +11,12 @@ func createSidewinderMaze(g *grid, seed int64) *grid {
 			currCell := g.cells[row][col]
 			run = append(run, currCell)
 
-			if currCell.east == nil || (currCell.south != nil && rand.Intn(2) == 0) {
+			isAtEastBoundary := (currCell.east == nil)
+			isAtSouthBoundary := (currCell.south == nil)
+
+			shouldCloseRun := isAtEastBoundary || (!isAtSouthBoundary && rand.Intn(2) == 0)
+
+			if shouldCloseRun {
 				index := rand.Intn(len(run))
 				chosenCell := run[index]
 				if chosenCell.south != nil {
