@@ -12,22 +12,22 @@ func TestNewGrid(t *testing.T) {
 	var randomSeed int64 = 1
 
 	g := newGrid(1, 1)
-	assert.Equal(t, g.rows, 1)
-	assert.Equal(t, g.cols, 1)
-	assert.Equal(t, len(g.cells), 1)
-	assert.Equal(t, len(g.cells[0]), 1)
+	assert.Equal(t, 1, g.rows)
+	assert.Equal(t, 1, g.cols)
+	assert.Equal(t, 1, len(g.cells))
+	assert.Equal(t, 1, len(g.cells[0]))
 	assert.Nil(t, g.cells[0][0].north)
 	assert.Nil(t, g.cells[0][0].east)
 	assert.Nil(t, g.cells[0][0].south)
 	assert.Nil(t, g.cells[0][0].west)
-	assert.Equal(t, g.getSize(), 1)
-	assert.Equal(t, g.getRandomCell(randomSeed), g.cells[0][0])
+	assert.Equal(t, 1, g.getSize())
+	assert.Equal(t, g.cells[0][0], g.getRandomCell(randomSeed))
 
 	g = newGrid(100, 100)
-	assert.Equal(t, g.rows, 100)
-	assert.Equal(t, g.cols, 100)
-	assert.Equal(t, len(g.cells), 100)
-	assert.Equal(t, len(g.cells[0]), 100)
+	assert.Equal(t, 100, g.rows)
+	assert.Equal(t, 100, g.cols)
+	assert.Equal(t, 100, len(g.cells))
+	assert.Equal(t, 100, len(g.cells[0]))
 
 	// Make sure the connection is bidirectional
 	assert.Equal(t, g.cells[50][50].north, g.cells[49][50])
@@ -39,8 +39,8 @@ func TestNewGrid(t *testing.T) {
 	assert.Equal(t, g.cells[50][51].west, g.cells[50][50])
 	assert.Equal(t, g.cells[51][50].north, g.cells[50][50])
 	assert.Equal(t, g.cells[50][49].east, g.cells[50][50])
-	assert.Equal(t, g.getSize(), 10000)
-	assert.Equal(t, g.getRandomCell(randomSeed), g.cells[81][87])
+	assert.Equal(t, 10000, g.getSize())
+	assert.Equal(t, g.cells[81][87], g.getRandomCell(randomSeed))
 }
 
 func TestGridDrawingASCII(t *testing.T) {

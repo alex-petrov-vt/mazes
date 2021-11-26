@@ -8,8 +8,8 @@ import (
 
 func TestNewCell(t *testing.T) {
 	s := newCell(1, 2)
-	assert.Equal(t, s.row, 1)
-	assert.Equal(t, s.col, 2)
+	assert.Equal(t, 1, s.row)
+	assert.Equal(t, 2, s.col)
 
 	assert.Nil(t, s.north)
 	assert.Nil(t, s.east)
