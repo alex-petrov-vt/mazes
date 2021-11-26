@@ -4,11 +4,11 @@ import "math/rand"
 
 func createBinaryTreeMaze(g *grid, seed int64) *grid {
 	rand.Seed(seed)
+	neighbors := make([]*cell, 0, 2)
 
 	for row := range g.cells {
 		for col := range g.cells[row] {
 			currCell := g.cells[row][col]
-			neighbors := make([]*cell, 0, 2)
 			if currCell.south != nil {
 				neighbors = append(neighbors, currCell.south)
 			}
@@ -23,6 +23,8 @@ func createBinaryTreeMaze(g *grid, seed int64) *grid {
 				neighbor := neighbors[index]
 				currCell.link(neighbor)
 			}
+
+			neighbors = neighbors[:0]
 		}
 	}
 
