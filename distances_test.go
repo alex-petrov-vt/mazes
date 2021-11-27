@@ -109,5 +109,49 @@ func TestFindingShortestPath(t *testing.T) {
 `
 
 	assert.Equal(t, expected, distanceGrid.String())
+}
+
+func TestFindingLongestPath(t *testing.T) {
+	var randomSeed int64 = 1
+
+	grid := newGrid(4, 4)
+	grid = createBinaryTreeMaze(grid, randomSeed)
+
+	// binary tree algorithm with a seed of 1 and size of 4x4
+	// will produce the following maze
+	// +---+---+---+---+
+	// |               |
+	// +---+---+---+   +
+	// |       |       |
+	// +---+   +---+   +
+	// |   |   |   |   |
+	// +   +   +   +   +
+	// |               |
+	// +---+---+---+---+
+
+	// we want to find a longest path in the maze
+	distanceGrid := newDistanceGrid(4, 4)
+	distanceGrid.grid = grid
+
+	distances := findDistances(grid.cells[0][0])
+	distanceGrid.distances = distances
+	assert.Equal(t, grid.cells[1][0], distances.getMostDistantPoint())
+
+	distances = distances.findLongestPath()
+	distanceGrid.distances = distances
+
+	expected := `
++---+---+---+---+
+| b   a   9   8 |
++---+---+---+   +
+| 0   1 |     7 |
++---+   +---+   +
+|   | 2 |   | 6 |
++   +   +   +   +
+|     3   4   5 |
++---+---+---+---+
+`
+
+	assert.Equal(t, expected, distanceGrid.String())
 
 }

@@ -55,3 +55,28 @@ func (d *distances) findShortestPath(c *cell) *distances {
 
 	return path
 }
+
+func (d *distances) getMostDistantPoint() *cell {
+	maxDistance := 0
+	maxCell := d.root
+
+	for currCell := range d.cells {
+		if d.cells[currCell] > maxDistance {
+			maxCell = currCell
+			maxDistance = d.cells[currCell]
+		}
+	}
+
+	return maxCell
+}
+
+func (d *distances) findLongestPath() *distances {
+	mostDistantPoint := d.getMostDistantPoint()
+
+	secondDistances := findDistances(mostDistantPoint)
+
+	goal := secondDistances.getMostDistantPoint()
+
+	longestPath := secondDistances.findShortestPath(goal)
+	return longestPath
+}
