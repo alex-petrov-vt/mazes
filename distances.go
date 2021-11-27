@@ -37,3 +37,21 @@ func findDistances(c *cell) *distances {
 
 	return d
 }
+
+func (d *distances) findShortestPath(c *cell) *distances {
+	currCell := c
+	path := newDistances(d.root)
+	path.cells[currCell] = d.cells[currCell]
+
+	for currCell != d.root {
+		for link := range currCell.links {
+			if d.cells[link] < d.cells[currCell] {
+				path.cells[link] = d.cells[link]
+				currCell = link
+				break
+			}
+		}
+	}
+
+	return path
+}

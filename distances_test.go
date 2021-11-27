@@ -67,3 +67,47 @@ func TestFindingDistances(t *testing.T) {
 	assert.Equal(t, 5, d.cells[g.cells[2][1]])
 	assert.Equal(t, 4, d.cells[g.cells[2][2]])
 }
+
+func TestFindingShortestPath(t *testing.T) {
+	var randomSeed int64 = 1
+
+	grid := newGrid(4, 4)
+	grid = createBinaryTreeMaze(grid, randomSeed)
+
+	// binary tree algorithm with a seed of 1 and size of 4x4
+	// will produce the following maze
+	// +---+---+---+---+
+	// |               |
+	// +---+---+---+   +
+	// |       |       |
+	// +---+   +---+   +
+	// |   |   |   |   |
+	// +   +   +   +   +
+	// |               |
+	// +---+---+---+---+
+
+	// we want to find the shortest path from southwest corner to
+	// root in the northwest corner
+
+	distanceGrid := newDistanceGrid(4, 4)
+	distanceGrid.grid = grid
+
+	distances := findDistances(grid.cells[0][0])
+	shortestPath := distances.findShortestPath(grid.cells[3][0])
+	distanceGrid.distances = shortestPath
+
+	expected := `
++---+---+---+---+
+| 0   1   2   3 |
++---+---+---+   +
+|       |     4 |
++---+   +---+   +
+|   |   |   | 5 |
++   +   +   +   +
+| 9   8   7   6 |
++---+---+---+---+
+`
+
+	assert.Equal(t, expected, distanceGrid.String())
+
+}
