@@ -1,16 +1,18 @@
-package main
+package algorithms
 
 import (
+	"fmt"
 	"testing"
 
+	"github.com/alex-petrov-vt/mazes/grid"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestCreatingBinaryTreeMaze(t *testing.T) {
 	var randomSeed int64 = 1
 
-	grid := newGrid(2, 2)
-	grid = createBinaryTreeMaze(grid, randomSeed)
+	g := grid.NewGrid(2, 2)
+	g = CreateBinaryTreeMaze(g, randomSeed)
 
 	expected := `
 +---+---+
@@ -19,10 +21,10 @@ func TestCreatingBinaryTreeMaze(t *testing.T) {
 |       |
 +---+---+
 `
-	assert.Equal(t, expected, grid.String())
+	assert.Equal(t, expected, fmt.Sprintf("%s", g))
 
-	grid = newGrid(4, 4)
-	grid = createBinaryTreeMaze(grid, randomSeed)
+	g = grid.NewGrid(4, 4)
+	g = CreateBinaryTreeMaze(g, randomSeed)
 
 	expected = `
 +---+---+---+---+
@@ -35,5 +37,5 @@ func TestCreatingBinaryTreeMaze(t *testing.T) {
 |               |
 +---+---+---+---+
 `
-	assert.Equal(t, expected, grid.String())
+	assert.Equal(t, expected, fmt.Sprintf("%s", g))
 }

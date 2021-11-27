@@ -1,4 +1,4 @@
-module github.com/alex-petrov-vt/mazes-for-programmers
+module github.com/alex-petrov-vt/mazes
 
 go 1.16
 
