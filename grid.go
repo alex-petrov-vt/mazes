@@ -74,6 +74,10 @@ func (g *grid) getRandomCell(seed int64) *cell {
 }
 
 func (g *grid) String() string {
+	return g.printWithCellContent(g.getCellContent)
+}
+
+func (g *grid) printWithCellContent(getCellContent func(*cell) string) string {
 	result := strings.Builder{}
 	result.WriteString("\n+" + strings.Repeat("---+", g.cols) + "\n")
 
@@ -86,7 +90,7 @@ func (g *grid) String() string {
 			cell := g.cells[row][col]
 
 			// Each cell is three spaces wide
-			rowLine.WriteString("   ")
+			rowLine.WriteString(" " + getCellContent(cell) + " ")
 
 			// Check for cell below
 			if row == g.rows-1 || !cell.isLinked(g.cells[row+1][col]) {
@@ -108,4 +112,8 @@ func (g *grid) String() string {
 	}
 
 	return result.String()
+}
+
+func (g *grid) getCellContent(c *cell) string {
+	return " "
 }
