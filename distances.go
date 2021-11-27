@@ -1,0 +1,39 @@
+package main
+
+type distances struct {
+	root  *cell
+	cells map[*cell]int
+}
+
+func newDistances(c *cell) *distances {
+	cells := make(map[*cell]int)
+	cells[c] = 0
+	return &distances{root: c, cells: cells}
+}
+
+func findDistances(c *cell) *distances {
+	d := newDistances(c)
+
+	nextCells := make([]*cell, 0)
+	nextCells = append(nextCells, c)
+
+	for len(nextCells) != 0 {
+		newNextCells := make([]*cell, 0)
+
+		for _, currCell := range nextCells {
+			for link := range currCell.links {
+				_, alreadyCounted := d.cells[link]
+				if alreadyCounted {
+					continue
+				} else {
+					d.cells[link] = d.cells[currCell] + 1
+					newNextCells = append(newNextCells, link)
+				}
+			}
+		}
+
+		nextCells = newNextCells
+	}
+
+	return d
+}
