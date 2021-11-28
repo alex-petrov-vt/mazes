@@ -72,7 +72,7 @@ func (d *Distances) getMostDistantPoint() *grid.Cell {
 	return maxCell
 }
 
-func (d *Distances) findLongestPath() *Distances {
+func (d *Distances) FindLongestPath() *Distances {
 	mostDistantPoint := d.getMostDistantPoint()
 
 	secondDistances := FindDistances(mostDistantPoint)

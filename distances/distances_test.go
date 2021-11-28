@@ -139,7 +139,7 @@ func TestFindingLongestPath(t *testing.T) {
 	distanceGrid.Distances = distances
 	assert.Equal(t, grid.Cells[1][0], distances.getMostDistantPoint())
 
-	distances = distances.findLongestPath()
+	distances = distances.FindLongestPath()
 	distanceGrid.Distances = distances
 
 	expected := `
