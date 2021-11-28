@@ -23,4 +23,8 @@ func main() {
 	shortestPath := d.FindShortestPath(g.Cells[5][5])
 	distanceGrid.Distances = shortestPath
 	fmt.Printf("%s", distanceGrid)
+
+	longestPath := d.FindLongestPath()
+	distanceGrid.Distances = longestPath
+	fmt.Printf("%s", distanceGrid)
 }
