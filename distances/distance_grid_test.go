@@ -3,11 +3,13 @@ package distances
 import (
 	"testing"
 
+	"github.com/alex-petrov-vt/mazes/grid"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestNewDistanceGrid(t *testing.T) {
-	dg := NewDistanceGrid(2, 2)
+    g := grid.NewGrid(2, 2)
+	dg := NewDistanceGrid(g)
 	assert.Equal(t, 2, dg.Grid.Rows)
 	assert.Equal(t, 2, dg.Grid.Cols)
 	assert.Equal(t, 2, len(dg.Grid.Cells))
@@ -17,7 +19,8 @@ func TestNewDistanceGrid(t *testing.T) {
 }
 
 func TestDistanceGridDrawingASCII(t *testing.T) {
-	dg := NewDistanceGrid(3, 3)
+    g := grid.NewGrid(3, 3)
+	dg := NewDistanceGrid(g)
 
 	dg.Grid.Cells[0][0].Link(dg.Grid.Cells[0][1])
 	dg.Grid.Cells[0][0].Link(dg.Grid.Cells[1][0])

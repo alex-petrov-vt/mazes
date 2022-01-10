@@ -11,8 +11,7 @@ type DistanceGrid struct {
 	Distances *Distances
 }
 
-func NewDistanceGrid(rows, cols int) *DistanceGrid {
-	g := grid.NewGrid(rows, cols)
+func NewDistanceGrid(g *grid.Grid) *DistanceGrid {
 	return &DistanceGrid{Grid: g, Distances: nil}
 }
 

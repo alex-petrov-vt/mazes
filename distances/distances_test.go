@@ -91,8 +91,7 @@ func TestFindingShortestPath(t *testing.T) {
 	// we want to find the shortest path from southwest corner to
 	// root in the northwest corner
 
-	distanceGrid := NewDistanceGrid(4, 4)
-	distanceGrid.Grid = grid
+	distanceGrid := NewDistanceGrid(grid)
 
 	distances := FindDistances(grid.Cells[0][0])
 	shortestPath := distances.FindShortestPath(grid.Cells[3][0])
@@ -132,8 +131,7 @@ func TestFindingLongestPath(t *testing.T) {
 	// +---+---+---+---+
 
 	// we want to find a longest path in the maze
-	distanceGrid := NewDistanceGrid(4, 4)
-	distanceGrid.Grid = grid
+	distanceGrid := NewDistanceGrid(grid)
 
 	distances := FindDistances(grid.Cells[0][0])
 	distanceGrid.Distances = distances
